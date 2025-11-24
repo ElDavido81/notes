@@ -4,16 +4,16 @@ const db = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event, context) => {
 
-  const {userId, createdAt} = JSON.parse(event.body);
+  const {userId, id} = JSON.parse(event.body);
 
   try { 
     console.log(userId)
-    console.log(createdAt)
+    console.log(id)
   await db.delete({
     TableName: 'notes-db',
     Key: {
       userId: userId,
-      createdAt: createdAt
+      id: id
     }
   }).promise();
 

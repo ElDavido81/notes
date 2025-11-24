@@ -39,6 +39,13 @@ functions:
           path: '/api/notes'
           method: DELETE
 
+  updateNote:
+    handler: functions/updateNote/index.handler
+    events:
+      - httpApi:
+          path: '/api/notes'
+          method: PATCH
+
 resources:
   Resources:
     notesDb:
@@ -48,11 +55,11 @@ resources:
         AttributeDefinitions:
           - AttributeName: userId
             AttributeType: S
-          - AttributeName: createdAt
+          - AttributeName: id
             AttributeType: S
         KeySchema:
           - AttributeName: userId
             KeyType: HASH
-          - AttributeName: createdAt
+          - AttributeName: id
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST

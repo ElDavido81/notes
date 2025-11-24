@@ -6,13 +6,12 @@ exports.handler = async (event, context) => {
 
   const note = JSON.parse(event.body);
   const random = Math.random().toString(36).substring(2, 8);
-  const userId = "test"
-  const timestamp = new Date().getTime();
-
+  const userId = "test" // lägg till login
 
   note.id = `${random}`;
   note.userId = `${userId}`;
-  note.createdAt = `${timestamp}`;
+  note.createdAt =  new Date().toISOString();
+  // note.modifiedAt = new Date().toISOString();
 
   try {
     await db.put({
