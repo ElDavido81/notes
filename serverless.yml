@@ -1,0 +1,40 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: ma24yh
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: notes
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  iam:
+    role: arn:aws:iam::980826468423:role/test
+
+build:
+  external: 
+    - aws-sdk
+
+package:
+  individually: true
+
+functions:
+  getNotes:
+    handler: functions/getNotes/index.handler
+    events:
+      - httpApi:
+          path: '/notes'
+          method: GET
+
+resources:
+  Resources:
+    notesDb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: notes-db
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
