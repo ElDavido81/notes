@@ -29,11 +29,11 @@ async function createAccount(username, hashedPassword, accountId, firstname, las
 
 async function signup(username, password, firstname, lastname) {
 
-  // if (userId) {
+  // if (username) {
   //   return {success: false, message: 'Username already exists.'}
   // }
 
-  const hashedPassword = bcrypt.hash(password, 10)
+  const hashedPassword = await bcrypt.hash(password, 10)
   const accountId = Math.random().toString(36).substring(2, 8);
 
   const result = await createAccount(username, hashedPassword, accountId, firstname, lastname );
