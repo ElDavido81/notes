@@ -1,10 +1,15 @@
 const AWS = require('aws-sdk');
 const { sendResponse } = require('../../responses');
 const db = new AWS.DynamoDB.DocumentClient();
+const middy = require('@middy/core');
+const { validateToken } = require('../middleware/auth');
 
-exports.handler = async (event, context) => {
+const deleteNote = async (event, context) => {
 
   const {userId, id} = JSON.parse(event.body);
+
+  if (event?.error && event?.error == '401')
+  return sendResponse(401, {success: false, message: 'Invalid token!'});
 
   try { 
     console.log(userId)
@@ -25,3 +30,6 @@ exports.handler = async (event, context) => {
     return sendResponse(404, {message: 'Note not found.'})
   }
 }
+const handler = middy(deleteNote).use(validateToken);
+
+module.exports = {handler}
