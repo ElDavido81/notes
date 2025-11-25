@@ -46,6 +46,13 @@ functions:
           path: '/api/notes'
           method: PATCH
 
+  signUp:
+    handler: functions/signUp/index.handler
+    events:
+      - httpApi:
+          path: '/api/user/signup'
+          method: POST
+
 resources:
   Resources:
     notesDb:
@@ -62,4 +69,16 @@ resources:
             KeyType: HASH
           - AttributeName: id
             KeyType: RANGE
+        BillingMode: PAY_PER_REQUEST
+
+    usersDb:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: notes-accounts
+        AttributeDefinitions:
+          - AttributeName: username
+            AttributeType: S
+        KeySchema:
+          - AttributeName: username
+            KeyType: HASH
         BillingMode: PAY_PER_REQUEST
