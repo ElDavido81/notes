@@ -1,13 +1,26 @@
 const AWS = require('aws-sdk')
 const { sendResponse } = require('../../responses/index')
 const db = new AWS.DynamoDB.DocumentClient();
+const middy = require('@middy/core');
+const { validateToken } = require('../middleware/auth');
 
-exports.handler = async (event, context) => {
+const getNotes = async (event, context) => {
+
+const {userId} = JSON.parse(event.body); 
+
+if (event?.error && event?.error == '401')
+  return sendResponse(401, {success: false, message: 'Invalid token!'});
 
 try {
+  console.log(userId);
   const {Items} = await db.scan({
-    TableName: 'notes-db'
+    TableName: 'notes-db',
+    FilterExpression: "attribute_exists(#userId) AND #userId = :userIdValue",
+    ExpressionAttributeNames: {"#userId" : "userId"},
+    ExpressionAttributeValues: {":userIdValue": userId}
   }).promise();
+
+  console.log('getNotes running');
 
   return sendResponse(200, {Items});
 
@@ -18,3 +31,7 @@ try {
   }
 
 }
+
+const handler = middy(getNotes).use(validateToken);
+
+module.exports = {handler}

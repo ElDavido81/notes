@@ -2,6 +2,7 @@ const AWS = require('aws-sdk')
 const { sendResponse } = require('../../responses/index')
 const db = new AWS.DynamoDB.DocumentClient();
 const bcrypt = require('bcryptjs');
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 async function getUser(username) {
@@ -36,7 +37,7 @@ const correctPassword = await bcrypt.compare(password, user.password);
 
 if(!correctPassword) return {success: false, message: 'Incorrect username or password'};
 
-const token = jwt.sign({id: user.accoundId, username: user.username}, "aabbcc", {expiresIn: 3600})
+const token = jwt.sign({id: user.accoundId, username: user.username}, process.env.JWT, {expiresIn: 3600})
 
 return {success: true, token: token}
 
