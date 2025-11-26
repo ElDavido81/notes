@@ -11,6 +11,15 @@ const addNotes = async (event, context) => {
 
   const note = JSON.parse(event.body);
   const random = Math.random().toString(36).substring(2, 8);
+  const title = note.title;
+  const noteText = note.noteText;
+
+  if (title.length >50) {
+      return sendResponse(400, {success: false, message: 'Title is too long. Maximum 50 char.'});
+  }
+  if (noteText.length >300) {
+      return sendResponse(400, {success: false, message: 'Note is too long. Maximum 300 char.'});
+  }
 
   note.id = `${random}`;
   note.userId = event.userId;
