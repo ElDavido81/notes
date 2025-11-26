@@ -6,17 +6,20 @@ const { validateToken } = require('../middleware/auth');
 
 const getNotes = async (event, context) => {
 
-const {userId} = JSON.parse(event.body); 
+console.log(event.id);
+const userId = event.userId; 
 
 if (event?.error && event?.error == '401')
   return sendResponse(401, {success: false, message: 'Invalid token!'});
 
 try {
   console.log(userId);
-  const {Items} = await db.scan({
+  const {Items} = await db.query({
     TableName: 'notes-db',
-    FilterExpression: "attribute_exists(#userId) AND #userId = :userIdValue",
-    ExpressionAttributeNames: {"#userId" : "userId"},
+    KeyConditionExpression: "userId = :userIdValue",
+
+    // FilterExpression: "attribute_exists(#userId) AND #userId = :userIdValue",
+    // ExpressionAttributeNames: {"#userId" : "userId"},
     ExpressionAttributeValues: {":userIdValue": userId}
   }).promise();
 

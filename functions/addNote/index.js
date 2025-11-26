@@ -11,12 +11,11 @@ const addNotes = async (event, context) => {
 
   const note = JSON.parse(event.body);
   const random = Math.random().toString(36).substring(2, 8);
-  // const userId = "test" // lägg till login
 
   note.id = `${random}`;
-  // note.userId = `${userId}`;
+  note.userId = event.userId;
   note.createdAt =  new Date().toISOString();
-  // note.modifiedAt = new Date().toISOString();
+  note.modifiedAt =  new Date().toISOString();
 
   try {
     await db.put({

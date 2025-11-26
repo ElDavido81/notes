@@ -8,14 +8,12 @@ const validateToken = {
     
       if (!token) throw new Error();
     
-      // ändra nyckeln
-      // get från aws secret manager
       const data = jwt.verify(token, process.env.JWT)
 
-      console.log(data);
+      console.log('här är data:', data);
 
       request.event.id = data.id;
-      request.event.username = data.username;
+      request.event.userId = data.username;
     
       return request.response;
 
