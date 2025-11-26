@@ -23,7 +23,7 @@ const {userId, id, ...filteredAttributes} = JSON.parse(event.body);
   await db.update({
     TableName: 'notes-db',
     Key: {
-      userId: userId,
+      userId: event.userId,
       id: id
     },
     ReturnValue: 'ALL_NEW',

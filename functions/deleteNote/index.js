@@ -6,18 +6,16 @@ const { validateToken } = require('../middleware/auth');
 
 const deleteNote = async (event, context) => {
 
-  const {userId, id} = JSON.parse(event.body);
+  const {id} = JSON.parse(event.body);
 
   if (event?.error && event?.error == '401')
   return sendResponse(401, {success: false, message: 'Invalid token!'});
 
   try { 
-    console.log(userId)
-    console.log(id)
   await db.delete({
     TableName: 'notes-db',
     Key: {
-      userId: userId,
+      userId: event.userId,
       id: id
     }
   }).promise();
