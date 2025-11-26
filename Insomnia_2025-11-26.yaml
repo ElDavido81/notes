@@ -1,0 +1,215 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Notes
+meta:
+  id: wrk_c83aa573b35c44fca04ab4286a46fe6b
+  created: 1763969828515
+  modified: 1763969828515
+  description: ""
+collection:
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/notes
+    name: addNote
+    meta:
+      id: req_ea682bf0e720462682c024ed7eae3c85
+      created: 1763974888608
+      modified: 1764179925044
+      isPrivate: false
+      description: ""
+      sortKey: -1764027283294.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "title": "",
+          "noteText": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/notes
+    name: getNotes
+    meta:
+      id: req_23606522877743138968781567977e06
+      created: 1763979720695
+      modified: 1764179927539
+      isPrivate: false
+      description: ""
+      sortKey: -1764008700432.25
+    method: GET
+    body:
+      mimeType: application/json
+      text: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/notes
+    name: deleteNote
+    meta:
+      id: req_1e66ef905abb4a1ab693a732a4b8df0c
+      created: 1763980542237
+      modified: 1764179873471
+      isPrivate: false
+      description: ""
+      sortKey: -1763980542237
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: |-
+        		{
+        			"id": ""
+        		}
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/notes
+    name: updateNote
+    meta:
+      id: req_6df18fbae81a4aa78daabbdd45d9750c
+      created: 1763990117570
+      modified: 1764179876009
+      isPrivate: false
+      description: ""
+      sortKey: -1763990117570
+    method: PATCH
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"id": "",
+        	"title": "",
+        	"noteText": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/user/signup
+    name: signUp
+    meta:
+      id: req_2dd0bf252b0242898c6f3eba9f54de94
+      created: 1764060534178
+      modified: 1764179921642
+      isPrivate: false
+      description: ""
+      sortKey: -1764064449119
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "",
+          "password": "",
+          "firstname": "",
+        	"lastname": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://1xsz741dnc.execute-api.eu-north-1.amazonaws.com/api/user/login
+    name: login
+    meta:
+      id: req_841eaf0732df41019aa4a04193c7c6d5
+      created: 1764064449019
+      modified: 1764179880082
+      isPrivate: false
+      description: ""
+      sortKey: -1764064449019
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"username": "",
+          "password": ""
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.0.0
+    authentication:
+      type: bearer
+      token: ""
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_7a719726bb1a74a0db48895d15c3022826fce67d
+    created: 1763969828517
+    modified: 1763969828517
+environments:
+  name: Base Environment
+  meta:
+    id: env_7a719726bb1a74a0db48895d15c3022826fce67d
+    created: 1763969828516
+    modified: 1763969828516
+    isPrivate: false
