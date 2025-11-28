@@ -35,7 +35,6 @@ const addNotes = async (event, context) => {
     return sendResponse(200, {success: true, note});
   }
   catch (error) {
-    console.log(error);
     return sendResponse(400, {message: 'could not add note'})
   }
     

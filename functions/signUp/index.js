@@ -3,6 +3,17 @@ const { sendResponse } = require("../../responses");
 const bcrypt = require('bcryptjs')
 const db = new AWS.DynamoDB.DocumentClient();
 
+async function isUsernameAvailable(username) {
+  const params = {
+    TableName: 'notes-accounts',
+    Key: {
+      username: username
+    }
+  };
+
+  const result = await db.get(params).promise();
+  return !result.Item;
+}
 
 async function createAccount(username, hashedPassword, accountId, firstname, lastname ) {
 
@@ -29,9 +40,11 @@ async function createAccount(username, hashedPassword, accountId, firstname, las
 
 async function signup(username, password, firstname, lastname) {
 
-  // if (username) {
-  //   return {success: false, message: 'Username already exists.'}
-  // }
+  const usernameAvailable = await isUsernameAvailable(username); 
+
+  if (!usernameAvailable) {
+    return {success: false, message: 'Username already exists.'}
+  }
 
   const hashedPassword = await bcrypt.hash(password, 10)
   const accountId = Math.random().toString(36).substring(2, 8);
